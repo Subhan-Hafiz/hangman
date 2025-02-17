@@ -1,4 +1,4 @@
-const words = ["AMSTERDAM", "JAVASCRIPT", "SOCKET", "HANGMAN"]; // Word list
+const words = require("./constants");
 
 module.exports = (io, socket, rooms) => {
     socket.on("startGame", ({ roomId }) => {
