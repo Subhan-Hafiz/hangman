@@ -1,0 +1,61 @@
+body {
+    margin: 1rem;
+}
+
+.hangman line,
+.hangman circle {
+    stroke: black;
+    stroke-width: 4;
+    fill: none;
+}
+
+[data-stack] {
+    --gutter: initial;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gutter, 0);
+}
+
+[data-stack~="justify-center"] {
+    justify-content: center;
+}
+
+[data-stack~="align-center"] {
+    align-items: center;
+}
+
+[data-cluster] {
+    --gutter: initial;
+    gap: var(--gutter, 0);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0.5rem;
+}
+
+[data-cluster~="align-center"] {
+    align-items: center;
+}
+
+[data-cluster~="justify-center"] {
+    justify-items: center;
+}
+
+[data-split] {
+    --gutter: initial;
+    gap: var(--gutter, 0);
+    display: flex;
+}
+
+[data-split]>* {
+    flex-grow: 1;
+    flex-basis: 50%;
+}
+
+[data-split~="1/4"]>*:nth-child(1) {
+    flex-basis: 25%;
+}
+
+.hangman {
+    border: 1px dashed blue;
+}
