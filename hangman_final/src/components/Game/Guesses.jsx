@@ -15,6 +15,7 @@ const Guesses = ({ room }) => {
         socket.on("gameStarted", ({ maskedWord, whoseTurn }) => {
             setMaskWord(maskedWord)
             setWhoseTurn(whoseTurn)
+            setAnswer("")
         })
         socket.on("gameOver", ({ status, word, answer }) => {
             setStatus(status)
@@ -65,7 +66,7 @@ const Guesses = ({ room }) => {
             <div data-cluster="align-center" style={{ "--gutter": "1rem" }}>
                 {status && `You ${status}`}
                 {status && isHost && <button style={{ backgroundColor: "#b1eead" }} onClick={restart}>Restart</button>}
-                {answer && <div>Answer is: {answer}</div>}
+                {status && answer && <div>Answer is: {answer}</div>}
             </div>
             <div data-cluster="justify-center" style={{ "--gutter": "0.5rem", width: "50%" }}>
                 {alphabets.map((letter, index) => (
