@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import socket from "../SocketInstance"
+import socket from "../Lobby/SocketInstance"
 import axios from "axios"
 
 const PlayerTurnTracker = ({ room }) => {

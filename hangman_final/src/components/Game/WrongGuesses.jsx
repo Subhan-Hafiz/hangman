@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import HangManFigure from './HangManFigure'
-import socket from '../SocketInstance'
+import socket from '../Lobby/SocketInstance'
 
 const WrongGuesses = () => {
   const [wrongGuesses, setWrongGuesses] = useState([])

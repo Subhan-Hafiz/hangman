@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import StartScreen from "../StartScreen"
+import StartScreen from "../Lobby/StartScreen"
 import Game from "./Game"
-import Lobby from "../Lobby"
-import socket from "../SocketInstance"
+import Lobby from "../Lobby/Lobby"
+import socket from "../Lobby/SocketInstance"
 
 const Hangman = () => {
     const [room, setRoom] = useState('')
