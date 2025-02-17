@@ -9,15 +9,17 @@ const Guesses = ({ room }) => {
     const [maskWord, setMaskWord] = useState('');
     const [whoseTurn, setWhoseTurn] = useState('');
     const [wrongGuesses, setWrongGuesses] = useState([])
+    const [answer, setAnswer] = useState("")
     const isHost = socket.id === room.host
     useEffect(() => {
         socket.on("gameStarted", ({ maskedWord, whoseTurn }) => {
             setMaskWord(maskedWord)
             setWhoseTurn(whoseTurn)
         })
-        socket.on("gameOver", ({ status, word }) => {
+        socket.on("gameOver", ({ status, word, answer }) => {
             setStatus(status)
             setMaskWord(word)
+            setAnswer(answer)
             // if (isHost && confirm(`You ${status}. Restart?`)) {
             //     restart()
             // }
@@ -52,6 +54,7 @@ const Guesses = ({ room }) => {
     const restart = () => {
         socket.emit("restart", { roomId: room.roomId })
         setStatus(false)
+        setAnswer("")
     }
 
     return (
@@ -62,6 +65,7 @@ const Guesses = ({ room }) => {
             <div data-cluster="align-center" style={{ "--gutter": "1rem" }}>
                 {status && `You ${status}`}
                 {status && isHost && <button style={{ backgroundColor: "#b1eead" }} onClick={restart}>Restart</button>}
+                {answer && <div>Answer is: {answer}</div>}
             </div>
             <div data-cluster="justify-center" style={{ "--gutter": "0.5rem", width: "50%" }}>
                 {alphabets.map((letter, index) => (

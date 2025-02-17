@@ -36,12 +36,12 @@ module.exports = (io, socket, rooms) => {
         }
         // check if the game is won
         if (!game.maskedWord.includes("_")) {
-            io.to(roomId).emit("gameOver", { status: "Win", word: game.maskedWord, wrongGuesses: game.wrongGuesses });
+            io.to(roomId).emit("gameOver", { status: "Win", word: game.maskedWord, wrongGuesses: game.wrongGuesses, answer: game.word });
             return
         }
         // check if game is lost
         if (game.wrongGuesses.length === 10) {
-            io.to(roomId).emit("gameOver", { status: "Lose", word: game.maskedWord, wrongGuesses: game.wrongGuesses })
+            io.to(roomId).emit("gameOver", { status: "Lose", word: game.maskedWord, wrongGuesses: game.wrongGuesses, answer: game.word })
             return
 
         }

@@ -51,7 +51,7 @@ const StartScreen = ({ setRoom }) => {
             {!showCreateRoomScreen && !showJoinRoomScreen && (
                 <div data-cluster="align-center" style={{ "--gutter": "1rem" }}>
                     <div data-stack>
-                        <label for="name" style={{ "fontSize": "0.875rem" }}>Set Player Name</label>
+                        <label htmlFor="name" style={{ "fontSize": "0.875rem" }}>Set Player Name</label>
                         <input type="text" id="name" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} />
                     </div>
                     <button onClick={() => setShowCreateRoomScreen(!showCreateRoomScreen)} disabled={!name}>New Room</button>
