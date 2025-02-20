@@ -3,49 +3,25 @@ import { alphabets } from "../constants/constants";
 import socket from "../Lobby/SocketInstance";
 import axios from "axios";
 
-const Guesses = ({ room }) => {
-    // const [word, setWord] = useState('AMSTERDAM')
-    const [status, setStatus] = useState(false)
-    const [maskWord, setMaskWord] = useState('');
-    const [whoseTurn, setWhoseTurn] = useState('');
-    const [wrongGuesses, setWrongGuesses] = useState([])
-    const [answer, setAnswer] = useState("")
+const Guesses = ({
+    room,
+    status,
+    maskWord,
+    whoseTurn,
+    wrongGuesses,
+    answer,
+    setStatus,
+    setMaskWord,
+    setAnswer,
+}) => {
     const isHost = socket.id === room.host
     useEffect(() => {
-        socket.on("gameStarted", ({ maskedWord, whoseTurn }) => {
-            setMaskWord(maskedWord)
-            setWhoseTurn(whoseTurn)
-            setAnswer("")
-        })
-        socket.on("gameOver", ({ status, word, answer }) => {
-            setStatus(status)
-            setMaskWord(word)
-            setAnswer(answer)
-            // if (isHost && confirm(`You ${status}. Restart?`)) {
-            //     restart()
-            // }
-        })
-        socket.on("gameUpdate", ({
-            maskedWord,
-            wrongGuesses,
-            turnIndex,
-            whoseTurn
-        }) => {
-            setStatus(false)
-            setMaskWord(maskedWord)
-            setWhoseTurn(whoseTurn)
-            setWrongGuesses(wrongGuesses)
-        })
         getRoomData()
-        return () => {
-            socket.off("gameStarted")
-            socket.off("gameOver")
-            socket.off("gameUpdate")
-        }
     }, [])
+
     const getRoomData = async () => {
         const response = await axios.get(`http://localhost:4000/rooms/${room.roomId}`);
-        setMaskWord(response.data.maskedWord)
+        setMaskWord(response?.data?.maskedWord)
     }
 
     const onGuess = (letter) => {
