@@ -2,20 +2,10 @@ import { useEffect, useState } from "react"
 import socket from "../Lobby/SocketInstance"
 import axios from "axios"
 
-const PlayerTurnTracker = ({ room }) => {
-    const [turnIndex, setTurnIndex] = useState(0)
+const PlayerTurnTracker = ({ room, turnIndex, setTurnIndex }) => {
     const [players, setPlayers] = useState(room.players)
     useEffect(() => {
         getRoomData()
-        socket.on("gameUpdate", ({
-            turnIndex
-        }) => {
-            setTurnIndex(turnIndex)
-        })
-
-        return () => {
-            socket.off("gameUpdate")
-        }
     }, [])
 
     const getRoomData = async () => {
